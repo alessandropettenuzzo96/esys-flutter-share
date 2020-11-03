@@ -78,7 +78,7 @@ public class SwiftEsysFlutterSharePlugin: NSObject, FlutterPlugin {
             .message
         ]
 
-        if #available(iOS 13, *) {
+        if #available(iOS 11, *) {
             excluded.append(.markupAsPDF);
         }
 
