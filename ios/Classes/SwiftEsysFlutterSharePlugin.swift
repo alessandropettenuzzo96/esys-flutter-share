@@ -60,7 +60,9 @@ public class SwiftEsysFlutterSharePlugin: NSObject, FlutterPlugin {
         // set up activity view controller
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
-        activityViewController.excludedActivityTypes = [
+        
+        
+       var excluded: [UIActivity.ActivityType] = [
             .saveToCameraRoll,
             .airDrop,
             .postToFacebook,
@@ -71,12 +73,20 @@ public class SwiftEsysFlutterSharePlugin: NSObject, FlutterPlugin {
             .postToTwitter,
             .assignToContact,
             .copyToPasteboard,
-            .markupAsPDF,
             .print,
-            .openInIBooks,
             .addToReadingList,
             .message
-        ];
+        ]
+
+        if #available(iOS 13, *) {
+            excluded.append(.markupAsPDF);
+        }
+
+        if #available(iOS 9, *) {
+            excluded.append(.openInIBooks);
+        }
+
+        activityViewController.excludedActivityTypes = excluded;
         
         // present the view controller
         let controller = UIApplication.shared.keyWindow!.rootViewController as! FlutterViewController
