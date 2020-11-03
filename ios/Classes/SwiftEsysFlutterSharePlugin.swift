@@ -60,6 +60,24 @@ public class SwiftEsysFlutterSharePlugin: NSObject, FlutterPlugin {
         // set up activity view controller
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
+        activityViewController.excludedActivityTypes = [
+            .saveToCameraRoll,
+            .airDrop,
+            .postToFacebook,
+            .postToWeibo,
+            .postToVimeo,
+            .postToTencentWeibo,
+            .postToFlickr,
+            .postToTwitter,
+            .assignToContact,
+            .copyToPasteboard,
+            .markupAsPDF,
+            .print,
+            .openInIBooks,
+            .addToReadingList,
+            .message
+        ];
+        
         // present the view controller
         let controller = UIApplication.shared.keyWindow!.rootViewController as! FlutterViewController
         activityViewController.popoverPresentationController?.sourceView = controller.view
